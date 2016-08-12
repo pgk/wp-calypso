@@ -1,3 +1,5 @@
+/** @ssr-ready **/
+
 /**
  * External dependencies
  */
@@ -6,6 +8,7 @@ import classNames from 'classnames';
 import { translate } from 'i18n-calypso';
 import {
 	debounce,
+	defer,
 	find,
 	mapValues,
 	omit,
@@ -35,6 +38,7 @@ const contextTypes = Object.freeze( {
 	tour: PropTypes.string.isRequired,
 	tourVersion: PropTypes.string.isRequired,
 	step: PropTypes.string.isRequired,
+	lastAction: PropTypes.object,
 } );
 
 export class Tour extends Component {
@@ -48,8 +52,8 @@ export class Tour extends Component {
 	static childContextTypes = contextTypes;
 
 	getChildContext() {
-		const { branching, next, quit, isValid, tour, tourVersion, step } = this.tourMeta;
-		return { branching, next, quit, isValid, tour, tourVersion, step };
+		const { branching, next, quit, isValid, lastAction, tour, tourVersion, step } = this.tourMeta;
+		return { branching, next, quit, isValid, lastAction, tour, tourVersion, step };
 	}
 
 	constructor( props, context ) {
@@ -62,12 +66,12 @@ export class Tour extends Component {
 	}
 
 	setTourMeta( props ) {
-		const { branching, next, quit, isValid, name, version, stepName } = props;
-		this.tourMeta = { branching, next, quit, isValid, tour: name, tourVersion: version, step: stepName };
+		const { branching, next, quit, isValid, lastAction, name, version, stepName } = props;
+		this.tourMeta = { branching, next, quit, isValid, lastAction, tour: name, tourVersion: version, step: stepName };
 	}
 
 	render() {
-		const { children, stepName } = this.props;
+		const { children, isValid, lastAction, stepName } = this.props;
 		const nextStep = find( children, stepComponent =>
 			stepComponent.props.name === stepName );
 		const isLastStep = nextStep === children[ children.length - 1 ];
@@ -76,7 +80,7 @@ export class Tour extends Component {
 			return null;
 		}
 
-		return React.cloneElement( nextStep, { isLastStep } );
+		return React.cloneElement( nextStep, { isLastStep, isValid, lastAction } );
 	}
 }
 
@@ -103,6 +107,14 @@ export class Step extends Component {
 
 	constructor( props, context ) {
 		super( props, context );
+
+		// keep track of current section for "blanket exit"
+		// (i.e. quitIfInvalidRoute in `Step` and `Continue`)
+		// TODO(mcsf,lsinger): works only in a few cases and could be more elegant
+		// e.g. doesn't work when switching from reader start to discover
+		// as the Step gets re-created anew
+		// (better than false positives, though)
+		this.section = this.pathToSection( location.pathname );
 	}
 
 	componentWillMount() {
@@ -117,6 +129,7 @@ export class Step extends Component {
 
 	componentWillReceiveProps( nextProps, nextContext ) {
 		this.skipIfInvalidContext( nextProps, nextContext );
+		this.quitIfInvalidRoute( nextProps, nextContext );
 		this.scrollContainer.removeEventListener( 'scroll', this.onScrollOrResize );
 		this.scrollContainer = query( nextProps.scrollContainer )[ 0 ] || global.window;
 		this.scrollContainer.addEventListener( 'scroll', this.onScrollOrResize );
@@ -124,9 +137,37 @@ export class Step extends Component {
 		this.setStepPosition( nextProps, shouldScrollTo );
 	}
 
+	/* TODO: needed? */
+	shouldComponentUpdate( nextProps, nextState ) {
+		return this.props !== nextProps || this.state !== nextState;
+	}
+
 	componentWillUnmount() {
 		global.window.removeEventListener( 'resize', this.onScrollOrResize );
 		this.scrollContainer.removeEventListener( 'scroll', this.onScrollOrResize );
+	}
+
+	quitIfInvalidRoute( props, context ) {
+		const { step, branching, lastAction } = context;
+		const stepBranching = branching[ step ];
+		const hasContinue = !! stepBranching.continue;
+		const isRouteSet = lastAction.type === 'ROUTE_SET';
+
+		if ( ( ! hasContinue ) && isRouteSet &&
+				this.isDifferentSection( lastAction.path ) ) {
+			defer( () => {
+				this.context.quit();
+			} );
+		}
+	}
+
+	isDifferentSection( path ) {
+		return this.section && path &&
+			this.section !== this.pathToSection( path );
+	}
+
+	pathToSection( path ) {
+		return path && path.split( '/' ).slice( 0, 2 ).join( '/' );
 	}
 
 	skipIfInvalidContext( props, context ) {
@@ -249,6 +290,7 @@ export class Continue extends Component {
 
 	componentDidMount() {
 		! this.props.hidden && this.addTargetListener();
+		this.quitIfInvalidRoute( this.props, this.context );
 	}
 
 	componentWillUnmount() {
@@ -264,7 +306,19 @@ export class Continue extends Component {
 	}
 
 	componentDidUpdate() {
+		this.quitIfInvalidRoute( this.props, this.context );
 		this.addTargetListener();
+	}
+
+	quitIfInvalidRoute( props ) {
+		defer( () => {
+			const quit = this.context.quit;
+			const target = targetForSlug( props.target );
+			// quit if we have a target but cant find it
+			if ( props.target && ! target ) {
+				quit();
+			}
+		} );
 	}
 
 	onContinue = () => {
@@ -277,6 +331,7 @@ export class Continue extends Component {
 
 		if ( click && ! when && targetNode && targetNode.addEventListener ) {
 			targetNode.addEventListener( 'click', this.onContinue );
+			targetNode.addEventListener( 'touchstart', this.onContinue );
 		}
 	}
 
@@ -286,6 +341,7 @@ export class Continue extends Component {
 
 		if ( click && ! when && targetNode && targetNode.removeEventListener ) {
 			targetNode.removeEventListener( 'click', this.onContinue );
+			targetNode.removeEventListener( 'touchstart', this.onContinue );
 		}
 	}
 
@@ -316,15 +372,16 @@ export class Link extends Component {
 
 //FIXME: where do these functions belong?
 export const makeTour = tree => {
-	const tour = ( { stepName, isValid, next, quit } ) =>
+	const tour = ( { stepName, isValid, lastAction, next, quit } ) =>
 		React.cloneElement( tree, {
-			stepName, isValid, next, quit,
+			stepName, isValid, lastAction, next, quit,
 			branching: tourBranching( tree ),
 		} );
 
 	tour.propTypes = {
 		stepName: PropTypes.string.isRequired,
 		isValid: PropTypes.func.isRequired,
+		lastAction: PropTypes.object,
 		next: PropTypes.func.isRequired,
 		quit: PropTypes.func.isRequired,
 		branching: PropTypes.object.isRequired,
