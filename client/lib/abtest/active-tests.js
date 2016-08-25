@@ -73,6 +73,14 @@ module.exports = {
 		defaultVariation: 'pressable',
 		allowExistingUsers: false,
 	},
+	signupVerticals: {
+		datestamp: '20160825',
+		variations: {
+			verticalsV1: 80,
+			verticalsV2: 20,
+		},
+		defaultVariation: 'verticalsV1'
+	},
 	readerSearchSuggestions: {
 		datestamp: '20160804',
 		variations: {
