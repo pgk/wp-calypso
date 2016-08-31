@@ -40,15 +40,13 @@ const Hider = React.createClass( {
 
 const FilterSummary = React.createClass( {
 	render() {
-		let names;
-
 		if ( this.props.items.length === 0 ) {
 			return ( <p>No matches found</p> );
 		} else if ( this.props.items.length === this.props.total || this.props.items.length === 1 ) {
 			return null;
 		}
 
-		names = this.props.items.map( function( item ) {
+		const names = this.props.items.map( function( item ) {
 			return item.props.children.type.displayName;
 		} );
 
@@ -62,9 +60,9 @@ export default React.createClass( {
 	displayName: 'Collection',
 
 	shouldWeHide: function( example ) {
-		let filter, searchString;
+		let searchString;
 
-		filter = this.props.filter || '';
+		const filter = this.props.filter || '';
 		searchString = example.type.displayName;
 
 		if ( this.props.component ) {
@@ -83,20 +81,23 @@ export default React.createClass( {
 
 	visibleExamples: function( examples ) {
 		return examples.filter( ( child ) => {
-			return !child.props.hide;
+			return ! child.props.hide;
 		} );
 	},
 
 	render: function() {
-		let summary, examples;
-
-		examples = React.Children.map( this.props.children, ( example ) => {
+		const examples = React.Children.map( this.props.children, ( example ) => {
 			return (
-				<Hider hide={ this.shouldWeHide( example ) } key={ 'example-' + example.type.displayName }>
+				<Hider
+					hide={ this.shouldWeHide( example ) }
+					key={ 'example-' + example.type.displayName }
+				>
 					{ example }
 				</Hider>
 			);
 		} );
+
+		let summary;
 
 		if ( ! this.props.component ) {
 			summary = (
