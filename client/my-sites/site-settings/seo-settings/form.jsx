@@ -66,7 +66,7 @@ function getGeneralTabUrl( slug ) {
 
 function stateForSite( site ) {
 	return {
-		seoMetaDescription: get( site, 'options.seo_meta_description', '' ),
+		frontPageMetaDescription: get( site, 'options.advanced_seo_front_page_description', '' ),
 		googleCode: get( site, 'options.verification_services_codes.google', '' ),
 		bingCode: get( site, 'options.verification_services_codes.bing', '' ),
 		pinterestCode: get( site, 'options.verification_services_codes.pinterest', '' ),
@@ -146,16 +146,16 @@ export const SeoForm = React.createClass( {
 		} );
 	},
 
-	handleMetaChange( { target: { value: seoMetaDescription } } ) {
+	handleMetaChange( { target: { value: frontPageMetaDescription } } ) {
 		const { dirtyFields } = this.state;
 
 		// Don't allow html tags in the input field
-		const hasHtmlTagError = anyHtmlTag.test( seoMetaDescription );
+		const hasHtmlTagError = anyHtmlTag.test( frontPageMetaDescription );
 
 		this.setState( Object.assign(
 			{ hasHtmlTagError },
-			! hasHtmlTagError && { seoMetaDescription },
-			{ dirtyFields: dirtyFields.add( 'seoMetaDescription' ) }
+			! hasHtmlTagError && { frontPageMetaDescription },
+			{ dirtyFields: dirtyFields.add( 'frontPageMetaDescription' ) }
 		) );
 	},
 
@@ -246,7 +246,7 @@ export const SeoForm = React.createClass( {
 			advanced_seo_title_formats: seoTitleToApi(
 				pickBy( this.state.seoTitleFormats, hasChanges )
 			),
-			seo_meta_description: this.state.seoMetaDescription,
+			advanced_seo_front_page_description: this.state.frontPageMetaDescription,
 			verification_services_codes: filteredCodes
 		};
 
@@ -303,7 +303,7 @@ export const SeoForm = React.createClass( {
 	},
 
 	render() {
-		const { showAdvancedSeo, showUpgradeNudge, upgradeToBusiness } = this.props;
+		const { showAdvancedSeo, showWebsiteMeta, showUpgradeNudge, upgradeToBusiness } = this.props;
 		const {
 			description: siteDescription,
 			slug = '',
@@ -316,7 +316,7 @@ export const SeoForm = React.createClass( {
 		const {
 			isSubmittingForm,
 			isFetchingSettings,
-			seoMetaDescription,
+			frontPageMetaDescription,
 			showPasteError = false,
 			hasHtmlTagError = false,
 			invalidCodes = [],
@@ -366,7 +366,7 @@ export const SeoForm = React.createClass( {
 			<SearchPreview
 				title={ seoTitle }
 				url={ siteUrl }
-				snippet={ seoMetaDescription }
+				snippet={ frontPageMetaDescription }
 			/>
 		);
 
@@ -445,39 +445,41 @@ export const SeoForm = React.createClass( {
 						</div>
 					}
 
-					<div>
-						<SectionHeader label={ this.translate( 'Website Meta' ) }>
-							{ submitButton }
-						</SectionHeader>
-						<Card>
-							<p>
-								{ this.translate(
-									'Craft a description of your Website up to 160 characters that will be used in ' +
-									'search engine results for your front page, and when your website is shared ' +
-									'on social media sites.'
-								) }
-							</p>
-							<p>
-								<FormLabel htmlFor="seo_meta_description">
-									{ this.translate( 'Front Page Meta Description' ) }
-								</FormLabel>
-								<CountedTextarea
-									name="seo_meta_description"
-									type="text"
-									id="seo_meta_description"
-									value={ seoMetaDescription || '' }
-									disabled={ isDisabled }
-									maxLength="300"
-									acceptableLength={ 159 }
-									onChange={ this.handleMetaChange }
-								/>
-								{ hasHtmlTagError &&
-									<FormInputValidation isError={ true } text={ this.translate( 'HTML tags are not allowed.' ) } />
-								}
-							</p>
-							{ preview }
-						</Card>
-					</div>
+					{ ( showAdvancedSeo || showWebsiteMeta ) &&
+						<div>
+							<SectionHeader label={ this.translate('Website Meta') }>
+								{ submitButton }
+							</SectionHeader>
+							<Card>
+								<p>
+									{ this.translate(
+										'Craft a description of your Website up to 160 characters that will be used in ' +
+										'search engine results for your front page, and when your website is shared ' +
+										'on social media sites.'
+									) }
+								</p>
+								<p>
+									<FormLabel htmlFor="advanced_seo_front_page_description">
+										{ this.translate('Front Page Meta Description') }
+									</FormLabel>
+									<CountedTextarea
+										name="advanced_seo_front_page_description"
+										type="text"
+										id="advanced_seo_front_page_description"
+										value={ frontPageMetaDescription || '' }
+										disabled={ isDisabled }
+										maxLength="300"
+										acceptableLength={ 159 }
+										onChange={ this.handleMetaChange }
+									/>
+									{ hasHtmlTagError
+										&& <FormInputValidation isError={ true } text={ this.translate('HTML tags are not allowed.') } />
+									}
+								</p>
+								{ preview }
+							</Card>
+						</div>
+					}
 
 					<SectionHeader label={ this.translate( 'Site Verification Services' ) }>
 						{ submitButton }
@@ -590,6 +592,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		selectedSite: getSelectedSite( state ),
 		storedTitleFormats: getSeoTitleFormatsForSite( getSelectedSite( state ) ),
 		showAdvancedSeo: isAdvancedSeoEligible && config.isEnabled( 'manage/advanced-seo' ),
+		showWebsiteMeta: !! get( site, 'options.advanced_seo_front_page_description', '' ),
 		showUpgradeNudge: config.isEnabled( 'manage/advanced-seo' )
 	};
 };
