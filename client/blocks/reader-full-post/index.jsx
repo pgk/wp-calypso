@@ -49,15 +49,24 @@ export class FullPostView extends React.Component {
 		[ 'handleBack', 'handleCommentClick', 'bindComments' ].forEach( fn => {
 			this[ fn ] = this[ fn ].bind( this );
 		} );
+		this.hasScrolledToCommentAnchor = false;
 	}
 
 	componentDidMount() {
 		KeyboardShortcuts.on( 'close-full-post', this.handleBack );
 		this.parseEmoji();
+		this.checkForCommentAnchor();
 	}
 
 	componentDidUpdate() {
 		this.parseEmoji();
+		this.checkForCommentAnchor();
+	}
+
+	componentWillReceiveProps( newProps ) {
+		if ( newProps.shouldShowComments ) {
+			this.checkForCommentAnchor();
+		}
 	}
 
 	componentWillUnmount() {
@@ -68,23 +77,39 @@ export class FullPostView extends React.Component {
 		this.props.onClose && this.props.onClose();
 	}
 
-	handleCommentClick() {
-		recordAction( 'click_comments' );
-		recordGaEvent( 'Clicked Post Comment Button' );
-		recordTrackForPost( 'calypso_reader_full_post_comments_button_clicked', this.props.post );
-		scrollTo( {
-			x: 0,
-			y: ReactDom.findDOMNode( this.comments ).offsetTop - 48,
-			duration: 300
-		} );
-	}
-
 	bindComments( node ) {
 		this.comments = node;
 	}
 
-	checkForCommentAnchor() {
+	handleCommentClick() {
+		recordAction( 'click_comments' );
+		recordGaEvent( 'Clicked Post Comment Button' );
+		recordTrackForPost( 'calypso_reader_full_post_comments_button_clicked', this.props.post );
+		this.scrollToComments();
+	}
 
+	// Does the URL contain the anchor #comments? If so, scroll to comments if we're not already there.
+	checkForCommentAnchor() {
+		const hash = window.location.hash.substr( 1 );
+		if ( this.comments && hash.indexOf( 'comments' ) > -1 && ! this.hasScrolledToCommentAnchor ) {
+			this.scrollToComments();
+		}
+	}
+
+	// Scroll to the top of the comments section.
+	scrollToComments() {
+		if ( ! this.comments ) {
+			return;
+		}
+		const commentsNode = ReactDom.findDOMNode( this.comments );
+		if ( commentsNode ) {
+			scrollTo( {
+				x: 0,
+				y: commentsNode.offsetTop - 48,
+				duration: 300
+			} );
+			this.hasScrolledToCommentAnchor = true;
+		}
 	}
 
 	parseEmoji() {
