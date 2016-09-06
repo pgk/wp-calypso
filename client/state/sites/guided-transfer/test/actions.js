@@ -1,13 +1,13 @@
 /**
  * External dependencies
  */
-import nock from 'nock';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
 /**
  * Internal dependencies
  */
+import useNock from 'test/helpers/use-nock';
 import {
 	GUIDED_TRANSFER_HOST_DETAILS_SAVE,
 	GUIDED_TRANSFER_HOST_DETAILS_SAVE_FAILURE,
@@ -30,10 +30,6 @@ describe( 'actions', () => {
 		spy.reset();
 	} );
 
-	after( () => {
-		nock.cleanAll();
-	} );
-
 	const sampleSiteId = 100658273;
 	const sampleStatus = {
 		issues: [],
@@ -54,7 +50,7 @@ describe( 'actions', () => {
 	} );
 
 	describe( '#requestProductsList()', () => {
-		before( () => {
+		useNock( ( nock ) => {
 			nock( 'https://public-api.wordpress.com:443' )
 				.get( `/wpcom/v2/sites/${sampleSiteId}/transfer` )
 				.times( 3 )
@@ -106,7 +102,7 @@ describe( 'actions', () => {
 	} );
 
 	describe( '#saveHostDetails()', () => {
-		before( () => {
+		useNock( ( nock ) => {
 			nock( 'https://public-api.wordpress.com:443' )
 				.post( `/wpcom/v2/sites/${sampleSiteId}/transfer` )
 				.times( 3 )
