@@ -16,7 +16,6 @@ import QuerySites from 'components/data/query-sites';
 import QuerySitePlans from 'components/data/query-site-plans';
 import { plansList } from 'lib/plans/constants';
 import formatCurrency from 'lib/format-currency';
-import { getSelectedSiteId } from 'state/ui/selectors';
 
 class PlanThankYouCard extends Component {
 	static propTypes = {
@@ -94,7 +93,6 @@ export default connect( ( state, ownProps ) => {
 
 	return {
 		plan,
-		siteURL: site && site.URL,
-		testSiteId: getSelectedSiteId( state ),
+		siteURL: site && site.URL
 	};
 } )( localize( PlanThankYouCard ) );
