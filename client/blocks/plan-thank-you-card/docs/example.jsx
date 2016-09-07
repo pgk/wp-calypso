@@ -24,7 +24,11 @@ function PlanThankYouCardExample( { primarySiteId } ) {
 }
 
 const ConnectedPlanThankYouCard = connect( ( state ) => {
-	const primarySiteId = get( getCurrentUser( state ), 'primary_blog' );
+	let primarySiteId = get( getCurrentUser( state ), 'primary_blog' );
+
+	if ( ! primarySiteId ) {
+		primarySiteId = -1;
+	}
 
 	return {
 		primarySiteId,
