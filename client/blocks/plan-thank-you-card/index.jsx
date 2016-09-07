@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import { localize } from 'i18n-calypso';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -15,6 +16,7 @@ import QuerySites from 'components/data/query-sites';
 import QuerySitePlans from 'components/data/query-site-plans';
 import { plansList } from 'lib/plans/constants';
 import formatCurrency from 'lib/format-currency';
+import { getSelectedSiteId } from 'state/ui/selectors';
 
 class PlanThankYouCard extends Component {
 	static propTypes = {
@@ -75,7 +77,7 @@ class PlanThankYouCard extends Component {
 						{ translate( "Now that we've taken care of the plan, it's time to see your new site." ) }
 					</div>
 					<a
-						className="plan-thank-you-card__button"
+						className={ classnames( 'plan-thank-you-card__button', { 'is-placeholder': ! siteURL } ) }
 						href={ siteURL }>
 						{ translate( 'Visit Your Site' ) }
 					</a>
@@ -92,6 +94,7 @@ export default connect( ( state, ownProps ) => {
 
 	return {
 		plan,
-		siteURL: site.URL
+		siteURL: site && site.URL,
+		testSiteId: getSelectedSiteId( state ),
 	};
 } )( localize( PlanThankYouCard ) );
