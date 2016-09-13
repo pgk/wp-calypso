@@ -43,8 +43,7 @@ class PressableStoreStep extends Component {
 		}
 	};
 
-	onEmailChange = ( event ) => {
-		const email = event.target.value;
+	onEmailChange = ( { target: { value: email } } ) => {
 		const isValid = EmailValidator.validate( email );
 		const error = this.state.error && isValid
 			? null
