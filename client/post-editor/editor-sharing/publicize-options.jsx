@@ -21,7 +21,7 @@ import Gridicon from 'components/gridicon';
 import { recordStat, recordEvent } from 'lib/posts/stats';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import { getEditorPostId } from 'state/ui/editor/selectors';
-import { isJetpackModuleActive } from 'state/sites/selectors';
+import { isJetpackModuleActive } from 'state/sites/selectors/jetpack';
 import { getEditedPostValue } from 'state/posts/selectors';
 import { postTypeSupports } from 'state/post-types/selectors';
 import { getCurrentUserId } from 'state/current-user/selectors';

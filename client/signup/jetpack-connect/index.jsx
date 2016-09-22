@@ -15,7 +15,7 @@ import LoggedOutFormLinks from 'components/logged-out-form/links';
 import LoggedOutFormLinkItem from 'components/logged-out-form/link-item';
 import JetpackConnectNotices from './jetpack-connect-notices';
 import SiteURLInput from './site-url-input';
-import { getSiteByUrl } from 'state/sites/selectors';
+import { getSiteByUrl } from 'state/sites/selectors/site';
 import QuerySites from 'components/data/query-sites';
 import JetpackInstallStep from './install-step';
 import versionCompare from 'lib/version-compare';

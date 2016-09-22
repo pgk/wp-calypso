@@ -36,7 +36,7 @@ import SeoSettingsUpgradeNudge from 'blocks/upgrade-nudge-expanded';
 import UpgradeNudge from 'my-sites/upgrade-nudge';
 import PageViewTracker from 'lib/analytics/page-view-tracker';
 import config from 'config';
-import { getSeoTitleFormatsForSite } from 'state/sites/selectors';
+import { getSeoTitleFormatsForSite } from 'state/sites/selectors/site';
 import { getSelectedSite } from 'state/ui/selectors';
 import { toApi as seoTitleToApi } from 'components/seo/meta-title-editor/mappings';
 import { recordTracksEvent } from 'state/analytics/actions';

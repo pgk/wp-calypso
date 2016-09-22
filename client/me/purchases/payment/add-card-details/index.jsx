@@ -14,7 +14,7 @@ import { getByPurchaseId, hasLoadedUserPurchasesFromServer } from 'state/purchas
 import { getSelectedSite as getSelectedSiteSelector } from 'state/ui/selectors';
 import HeaderCake from 'components/header-cake' ;
 import { isDataLoading, recordPageView } from 'me/purchases/utils';
-import { isRequestingSites } from 'state/sites/selectors';
+import { isRequestingSites } from 'state/sites/selectors/sites';
 import Main from 'components/main';
 import PurchaseCardDetails from 'me/purchases/components/purchase-card-details';
 import QueryUserPurchases from 'components/data/query-user-purchases';

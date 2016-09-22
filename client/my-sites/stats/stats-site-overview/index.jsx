@@ -13,7 +13,7 @@ import StatsTab from '../stats-tabs/tab';
 import SectionHeader from 'components/section-header';
 import QuerySiteStats from 'components/data/query-site-stats';
 import { getSiteStatsForQuery } from 'state/stats/lists/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 
 const StatsSiteOverview = React.createClass( {
 	proptypes: {

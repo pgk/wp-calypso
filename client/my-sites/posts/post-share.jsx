@@ -14,7 +14,7 @@ import QueryPostTypes from 'components/data/query-post-types';
 import Button from 'components/button';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import { postTypeSupports } from 'state/post-types/selectors';
-import { isJetpackModuleActive } from 'state/sites/selectors';
+import { isJetpackModuleActive } from 'state/sites/selectors/jetpack';
 import { getCurrentUserId } from 'state/current-user/selectors';
 import { getSiteUserConnections } from 'state/sharing/publicize/selectors';
 import { fetchConnections as requestConnections, sharePost, dismissShareConfirmation } from 'state/sharing/publicize/actions';

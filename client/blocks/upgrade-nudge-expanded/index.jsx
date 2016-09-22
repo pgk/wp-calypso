@@ -21,9 +21,9 @@ import { preventWidows } from 'lib/formatting';
 import { getFeatureTitle } from 'lib/plans';
 import { getPlanBySlug } from 'state/plans/selectors';
 import { PLAN_PERSONAL, plansList } from 'lib/plans/constants';
-import { getSitePlan } from 'state/sites/selectors';
+import { getSitePlan } from 'state/sites/selectors/plan';
 import { getSelectedSiteId } from 'state/ui/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import { recordTracksEvent } from 'state/analytics/actions';
 import PlanIcon from 'components/plans/plan-icon';
 

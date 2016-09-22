@@ -30,7 +30,7 @@ import { parseHtml } from 'lib/formatting';
 import { SocialItem } from 'components/vertical-menu/items';
 import { getEditorPostId } from 'state/ui/editor/selectors';
 import { getSitePost } from 'state/posts/selectors';
-import { getSeoTitle } from 'state/sites/selectors';
+import { getSeoTitle } from 'state/sites/selectors/site';
 import {
 	getSectionName,
 	getSelectedSite

@@ -18,7 +18,7 @@ import StatsModulePlaceholder from './placeholder';
 import SectionHeader from 'components/section-header';
 import QuerySiteStats from 'components/data/query-site-stats';
 import { getSelectedSiteId } from 'state/ui/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import {
 	isRequestingSiteStatsForQuery,
 	getSiteStatsNormalizedData

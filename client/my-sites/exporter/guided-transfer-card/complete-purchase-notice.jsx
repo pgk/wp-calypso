@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import { localize } from 'i18n-calypso';
 

@@ -23,7 +23,8 @@ import { addSiteFragment } from 'lib/route';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import { getEditorPostId } from 'state/ui/editor/selectors';
 import { getEditedPostValue } from 'state/posts/selectors';
-import { getSiteOption, isJetpackMinimumVersion, getSiteSlug } from 'state/sites/selectors';
+import { getSiteOption, getSiteSlug } from 'state/sites/selectors/site';
+import { isJetpackMinimumVersion } from 'state/sites/selectors/jetpack';
 import { getTerm } from 'state/terms/selectors';
 
 export class EditorCategoriesTagsAccordion extends Component {

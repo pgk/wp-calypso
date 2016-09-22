@@ -9,7 +9,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { getSite, getSiteSlug } from 'state/sites/selectors';
+import { getSite, getSiteSlug } from 'state/sites/selectors/site';
 import { getDomainsSuggestions, } from 'state/domains/suggestions/selectors';
 import { currentUserHasFlag } from 'state/current-user/selectors';
 import QueryDomainsSuggestions from 'components/data/query-domains-suggestions';

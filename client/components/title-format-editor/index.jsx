@@ -99,7 +99,7 @@ const {
 
 import Token from './token';
 import { fromEditor, toEditor } from './parser';
-import { buildSeoTitle } from 'state/sites/selectors';
+import { buildSeoTitle } from 'state/sites/selectors/site';
 import { getSelectedSite } from 'state/ui/selectors';
 import { localize } from 'i18n-calypso';
 

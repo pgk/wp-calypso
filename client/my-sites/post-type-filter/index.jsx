@@ -11,7 +11,8 @@ import includes from 'lodash/includes';
  * Internal dependencies
  */
 import { getSelectedSiteId } from 'state/ui/selectors';
-import { getSiteSlug, isJetpackSite } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
+import { isJetpackSite } from 'state/sites/selectors/jetpack';
 import { getNormalizedPostCounts } from 'state/posts/counts/selectors';
 import { mapPostStatus } from 'lib/route/path';
 import UrlSearch from 'lib/mixins/url-search';

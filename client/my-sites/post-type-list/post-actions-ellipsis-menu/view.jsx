@@ -12,7 +12,7 @@ import includes from 'lodash/includes';
 import PopoverMenuItem from 'components/popover/menu-item';
 import { mc } from 'lib/analytics';
 import { getPost, getPostPreviewUrl } from 'state/posts/selectors';
-import { isSitePreviewable } from 'state/sites/selectors';
+import { isSitePreviewable } from 'state/sites/selectors/site';
 import { setPreviewUrl } from 'state/ui/preview/actions';
 import { setLayoutFocus } from 'state/ui/layout-focus/actions';
 

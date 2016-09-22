@@ -11,7 +11,7 @@ import debugFactory from 'debug';
 import { closePreview } from 'state/ui/preview/actions';
 import { getSelectedSite, getSelectedSiteId } from 'state/ui/selectors';
 import { getPreviewUrl } from 'state/ui/preview/selectors';
-import { getSiteOption } from 'state/sites/selectors';
+import { getSiteOption } from 'state/sites/selectors/site';
 import addQueryArgs from 'lib/route/add-query-args';
 
 const debug = debugFactory( 'calypso:design-preview' );

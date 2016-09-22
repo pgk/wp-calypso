@@ -40,7 +40,7 @@ import { getByPurchaseId, hasLoadedUserPurchasesFromServer } from 'state/purchas
 import { getSelectedSite as getSelectedSiteSelector } from 'state/ui/selectors';
 import HeaderCake from 'components/header-cake';
 import { isDomainRegistration } from 'lib/products-values';
-import { isRequestingSites } from 'state/sites/selectors';
+import { isRequestingSites } from 'state/sites/selectors/sites';
 import Main from 'components/main';
 import Notice from 'components/notice';
 import NoticeAction from 'components/notice/notice-action';

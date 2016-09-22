@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
  * Internal dependencies
  */
 import { isRequestingPageTemplates } from 'state/page-templates/selectors';
-import { getSiteOption } from 'state/sites/selectors';
+import { getSiteOption } from 'state/sites/selectors/site';
 import { requestPageTemplates } from 'state/page-templates/actions';
 
 class QueryPageTemplates extends Component {

@@ -6,7 +6,7 @@ import get from 'lodash/get';
 /**
  * Internal dependencies
  */
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import { getEditedPost } from 'state/posts/selectors';
 
 /**

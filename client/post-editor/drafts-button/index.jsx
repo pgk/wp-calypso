@@ -12,7 +12,7 @@ import Button from 'components/button';
 import Count from 'components/count';
 import QueryPostCounts from 'components/data/query-post-counts';
 import { getSelectedSiteId } from 'state/ui/selectors';
-import { isJetpackSite } from 'state/sites/selectors';
+import { isJetpackSite } from 'state/sites/selectors/jetpack';
 import { getAllPostCount } from 'state/posts/counts/selectors';
 
 function EditorDraftsButton( { count, onClick, jetpack, siteId, hideText } ) {

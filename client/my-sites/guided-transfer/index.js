@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
  */
 import GuidedTransfer from './guided-transfer';
 import { getSelectedSiteId } from 'state/ui/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import { isEligibleForGuidedTransfer } from 'state/sites/guided-transfer/selectors';
 
 function mapStateToProps( state ) {

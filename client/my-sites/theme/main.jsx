@@ -27,7 +27,7 @@ import NavItem from 'components/section-nav/item';
 import Card from 'components/card';
 import Gridicon from 'components/gridicon';
 import { getSelectedSite } from 'state/ui/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import { getCurrentUserId } from 'state/current-user/selectors';
 import { isUserPaid } from 'state/purchases/selectors';
 import { isPremium, getForumUrl } from 'my-sites/themes/helpers';

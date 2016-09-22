@@ -21,7 +21,7 @@ import FormLabel from 'components/forms/form-label';
 import SectionHeader from 'components/section-header';
 import Card from 'components/card';
 import Button from 'components/button';
-import { isJetpackModuleActive, isJetpackMinimumVersion } from 'state/sites/selectors';
+import { isJetpackModuleActive, isJetpackMinimumVersion } from 'state/sites/selectors/jetpack';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import { requestPostTypes } from 'state/post-types/actions';
 import CustomPostTypeFieldset from './custom-post-types-fieldset';

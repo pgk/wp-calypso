@@ -21,7 +21,7 @@ import PopoverMenuItem from 'components/popover/menu-item';
 import Gridicon from 'components/gridicon';
 import { canUserDeleteItem } from 'lib/media/utils';
 import { getCurrentUser } from 'state/current-user/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import PlanStorage from 'my-sites/plan-storage';
 
 const MediaModalSecondaryActions = React.createClass( {

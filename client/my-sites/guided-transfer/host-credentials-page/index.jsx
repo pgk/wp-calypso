@@ -24,7 +24,7 @@ import {
 } from 'state/sites/guided-transfer/selectors';
 import {
 	getSiteSlug,
-} from 'state/sites/selectors';
+} from 'state/sites/selectors/site';
 
 class HostCredentialsPage extends Component {
 	static propTypes = {

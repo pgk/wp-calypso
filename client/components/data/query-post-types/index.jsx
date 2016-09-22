@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
  * Internal dependencies
  */
 import { isRequestingPostTypes } from 'state/post-types/selectors';
-import { getSiteOption } from 'state/sites/selectors';
+import { getSiteOption } from 'state/sites/selectors/site';
 import { requestPostTypes } from 'state/post-types/actions';
 
 class QueryPostTypes extends Component {

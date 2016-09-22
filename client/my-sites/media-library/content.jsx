@@ -25,7 +25,7 @@ import MediaActions from 'lib/media/actions';
 import { ValidationErrors as MediaValidationErrors } from 'lib/media/constants';
 import PreferencesActions from 'lib/preferences/actions';
 import { isMobile } from 'lib/viewport';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import MediaLibraryHeader from './header';
 import MediaLibraryList from './list';
 /**

@@ -10,7 +10,8 @@ import { localize } from 'i18n-calypso';
  */
 import { getSelectedSiteId, getSelectedSite } from 'state/ui/selectors';
 import { isRequestingPostTypes, getPostTypes } from 'state/post-types/selectors';
-import { getSiteSlug, isJetpackMinimumVersion } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
+import { isJetpackMinimumVersion } from 'state/sites/selectors/jetpack';
 import { addSiteFragment } from 'lib/route';
 import QueryPostTypes from 'components/data/query-post-types';
 import FormFieldset from 'components/forms/form-fieldset';

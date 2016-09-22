@@ -17,7 +17,7 @@ import accept from 'lib/accept';
 import { updatePreviewWithChanges } from 'lib/design-preview';
 import { getSelectedSite, getSelectedSiteId } from 'state/ui/selectors';
 import { getPreviewUrl } from 'state/ui/preview/selectors';
-import { getSiteOption } from 'state/sites/selectors';
+import { getSiteOption } from 'state/sites/selectors/site';
 import { getPreviewMarkup, getPreviewCustomizations, isPreviewUnsaved } from 'state/preview/selectors';
 import { closePreview } from 'state/ui/preview/actions';
 import DesignMenu from 'blocks/design-menu';

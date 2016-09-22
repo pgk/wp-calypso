@@ -10,7 +10,8 @@ import { localize } from 'i18n-calypso';
  */
 import PopoverMenuItem from 'components/popover/menu-item';
 import { mc } from 'lib/analytics';
-import { getSiteSlug, isJetpackModuleActive } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
+import { isJetpackModuleActive } from 'state/sites/selectors/jetpack';
 import { getPost } from 'state/posts/selectors';
 
 function bumpStat() {

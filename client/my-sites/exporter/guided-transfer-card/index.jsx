@@ -13,7 +13,7 @@ import QuerySiteGuidedTransfer from 'components/data/query-site-guided-transfer'
 import Gridicon from 'components/gridicon';
 import Button from 'components/forms/form-button';
 import { isGuidedTransferAvailableForAllSites } from 'state/sites/guided-transfer/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import InfoPopover from 'components/info-popover';
 

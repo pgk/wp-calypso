@@ -32,7 +32,7 @@ import { getSelectedSiteId } from 'state/ui/selectors';
 import { getEditorPostId } from 'state/ui/editor/selectors';
 import { getEditedPostValue } from 'state/posts/selectors';
 import { getPostType } from 'state/post-types/selectors';
-import { isJetpackMinimumVersion } from 'state/sites/selectors';
+import { isJetpackMinimumVersion } from 'state/sites/selectors/jetpack';
 import config from 'config';
 import EditorDrawerFeaturedImage from './featured-image';
 import EditorDrawerTaxonomies from './taxonomies';

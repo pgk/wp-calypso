@@ -9,25 +9,31 @@ import { expect } from 'chai';
 import config from 'config';
 import { useSandbox } from 'test/helpers/use-sinon';
 import {
+	isJetpackSite,
+	isJetpackModuleActive,
+	isJetpackMinimumVersion
+} from '../selectors/jetpack';
+import {
+	getSitePlan,
+	isCurrentSitePlan,
+	isCurrentPlanPaid
+} from '../selectors/plan';
+import {
 	getSite,
 	getSiteCollisions,
 	isSiteConflicting,
 	isSingleUserSite,
-	isJetpackSite,
-	isJetpackModuleActive,
-	isJetpackMinimumVersion,
 	getSiteSlug,
 	getSiteDomain,
 	getSiteTitle,
 	getSiteThemeShowcasePath,
 	isSitePreviewable,
-	isRequestingSites,
 	isRequestingSite,
 	getSiteByUrl,
-	getSitePlan,
-	isCurrentSitePlan,
-	isCurrentPlanPaid
-} from '../selectors';
+} from '../selectors/site';
+import {
+	isRequestingSites
+} from '../selectors/sites';
 
 describe( 'selectors', () => {
 	beforeEach( () => {

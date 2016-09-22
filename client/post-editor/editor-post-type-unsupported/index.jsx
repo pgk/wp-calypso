@@ -13,7 +13,7 @@ import { getSelectedSiteId } from 'state/ui/selectors';
 import { getEditorPostId, getEditorNewPostPath } from 'state/ui/editor/selectors';
 import { getEditedPostValue } from 'state/posts/selectors';
 import { getPostTypes, getPostType } from 'state/post-types/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import Button from 'components/button';
 import Dialog from 'components/dialog';
 

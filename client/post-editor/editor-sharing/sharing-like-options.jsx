@@ -13,7 +13,7 @@ import PostActions from 'lib/posts/actions';
 import { recordStat, recordEvent } from 'lib/posts/stats';
 import { isEditorNewPost } from 'state/ui/editor/selectors';
 import { getSelectedSiteId } from 'state/ui/selectors';
-import { isJetpackModuleActive } from 'state/sites/selectors';
+import { isJetpackModuleActive } from 'state/sites/selectors/jetpack';
 
 const SharingLikeOptions = React.createClass( {
 	propTypes: {

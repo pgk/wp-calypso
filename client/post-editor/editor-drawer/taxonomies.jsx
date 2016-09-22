@@ -15,7 +15,7 @@ import { getSelectedSiteId } from 'state/ui/selectors';
 import { getEditorPostId } from 'state/ui/editor/selectors';
 import { getEditedPostValue } from 'state/posts/selectors';
 import { getPostTypeTaxonomies } from 'state/post-types/taxonomies/selectors';
-import { isJetpackMinimumVersion } from 'state/sites/selectors';
+import { isJetpackMinimumVersion } from 'state/sites/selectors/jetpack';
 import Accordion from 'components/accordion';
 import Gridicon from 'components/gridicon';
 import TermTokenField from 'post-editor/term-token-field';

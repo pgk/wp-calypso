@@ -10,7 +10,7 @@ import { localize } from 'i18n-calypso';
  * Internal dependencies
  */
 import { getPost } from 'state/posts/selectors';
-import { isSingleUserSite } from 'state/sites/selectors';
+import { isSingleUserSite } from 'state/sites/selectors/site';
 import Gridicon from 'components/gridicon';
 
 function PostTypePostAuthor( { translate, singleUserSite, name } ) {

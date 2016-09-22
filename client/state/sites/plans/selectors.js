@@ -10,7 +10,7 @@ import moment from 'moment';
  * Internal dependencies
  */
 import { initialSiteState } from './reducer';
-import { getSite } from 'state/sites/selectors';
+import { getSite } from 'state/sites/selectors/site';
 import { createSitePlanObject } from './assembler';
 import createSelector from 'lib/create-selector';
 

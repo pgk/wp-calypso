@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 /**
  * Internal dependencies
  */
-import { isRequestingSites, isRequestingSite } from 'state/sites/selectors';
+import { isRequestingSites } from 'state/sites/selectors/sites';
+import { isRequestingSite } from 'state/sites/selectors/site';
 import { requestSites, requestSite } from 'state/sites/actions';
 
 class QuerySites extends Component {

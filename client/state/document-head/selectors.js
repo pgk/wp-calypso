@@ -8,7 +8,7 @@ import { compact } from 'lodash';
  */
 import { decodeEntities } from 'lib/formatting';
 import { getSelectedSiteId, isSiteSection } from 'state/ui/selectors';
-import { getSiteTitle } from 'state/sites/selectors';
+import { getSiteTitle } from 'state/sites/selectors/site';
 
 const UNREAD_COUNT_CAP = 40;
 

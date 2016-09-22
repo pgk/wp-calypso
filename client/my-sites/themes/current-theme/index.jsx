@@ -20,7 +20,7 @@ import {
 	bindOptionsToSite
 } from '../theme-options';
 import { trackClick } from '../helpers';
-import { isJetpackSite } from 'state/sites/selectors';
+import { isJetpackSite } from 'state/sites/selectors/jetpack';
 import { canCurrentUser } from 'state/current-user/selectors';
 import { getCurrentTheme } from 'state/themes/current-theme/selectors';
 import QueryCurrentTheme from 'components/data/query-current-theme';

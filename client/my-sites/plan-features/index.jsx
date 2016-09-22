@@ -15,7 +15,7 @@ import PlanFeaturesHeader from './header';
 import PlanFeaturesItem from './item';
 import Popover from 'components/popover';
 import PlanFeaturesActions from './actions';
-import { isCurrentPlanPaid, isCurrentSitePlan, getSitePlan } from 'state/sites/selectors';
+import { isCurrentPlanPaid, isCurrentSitePlan, getSitePlan } from 'state/sites/selectors/plan';
 import { getPlansBySiteId } from 'state/sites/plans/selectors';
 import { getSelectedSiteId } from 'state/ui/selectors';
 import { getCurrentUserCurrencyCode } from 'state/current-user/selectors';
@@ -37,7 +37,7 @@ import {
 	PLAN_BUSINESS
 } from 'lib/plans/constants';
 import { isFreePlan } from 'lib/plans';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import {
 	getPlanPath,
 	canUpgradeToPlan,

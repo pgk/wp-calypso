@@ -14,7 +14,7 @@ import {
 	getSelectedSite,
 	getSelectedSiteId
 } from 'state/ui/selectors';
-import { getSiteSlug } from 'state/sites/selectors';
+import { getSiteSlug } from 'state/sites/selectors/site';
 import {
 	isPremium,
 	isBusiness,
