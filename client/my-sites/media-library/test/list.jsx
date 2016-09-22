@@ -2,8 +2,8 @@
  * External dependencies
  */
 import { expect } from 'chai';
+import { noop, toArray } from 'lodash';
 import React from 'react';
-import toArray from 'lodash/toArray';
 import mockery from 'mockery';
 
 /**
@@ -38,6 +38,14 @@ describe( 'MediaLibraryList item selection', function() {
 	}
 
 	before( function() {
+		mockery.registerMock( 'lib/wp', {
+			me: () => ( {
+				get: noop
+			} )
+		} );
+		mockery.registerMock( 'components/infinite-list', EmptyComponent );
+		mockery.registerMock( './list-item', EmptyComponent );
+
 		mount = require( 'enzyme' ).mount;
 		MediaLibrarySelectedData = require( 'components/data/media-library-selected-data' );
 		MediaLibrarySelectedStore = require( 'lib/media/library-selected-store' );
@@ -51,8 +59,6 @@ describe( 'MediaLibraryList item selection', function() {
 			data: fixtures
 		} );
 
-		mockery.registerMock( 'components/infinite-list', EmptyComponent );
-		mockery.registerMock( './list-item', EmptyComponent );
 		MediaList = require( '../list' );
 	} );
 
